@@ -3,7 +3,7 @@ import random
 import hashlib
 import datetime
 
-from Cryptodome.Cipher import AES256
+from Cryptodome.Cipher import AES
 from Cryptodome.Hash import SHA256
 from Cryptodome.Util.Padding import pad
 
@@ -16,7 +16,7 @@ def encrypt(key, filename):
     for i in range(16):  # PKCS7Padding ya que es de 16 bytes modificables, y no 8 bytes fijos como en PKCS5Padding
         IV += chr(random.randint(0, 0xF))
     begin_time = datetime.datetime.now()
-    encryptor = AES256.new(key, AES256.MODE_CBC, IV.encode("utf8"))
+    encryptor = AES.new(key, AES.MODE_CBC, IV.encode("utf8"))
     with open(filename, 'rb') as inputfile:
         with open(output_file, 'wb') as outf:
             outf.write(file_size.encode("utf8"))
@@ -39,7 +39,7 @@ def decrypt(key, filename):
     with open(filename, 'rb') as inf:
         filesize = int(inf.read(16))
         IV = inf.read(16)
-        decryptor = AES256.new(key, AES256.MODE_CBC, IV)
+        decryptor = AES.new(key, AES.MODE_CBC, IV)
         with open(output_file, 'wb') as outf:
             while True:
                 chunk = inf.read(chunk_size)
