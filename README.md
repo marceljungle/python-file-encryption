@@ -1,5 +1,12 @@
 # python-file-encryption
 
+## Usage
+Windows  
+`>python imgEncrypt.py`  
+  
+
+Linux  
+`>./imgEncrypt.py`
 
 ## Modes  
 1. Encryption  
